@@ -20,5 +20,5 @@ while stk:
         nodes.add(s)
         stk.append(s)
 
-nodes.discard()
+nodes.discard(1)
 print(len(nodes))
