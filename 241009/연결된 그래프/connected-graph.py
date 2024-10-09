@@ -11,8 +11,6 @@ visited = [False for i in range(n+1)]
 stk = [1]
 visited[1] = True
 
-# for d in dic.get(1, []):   
-#     nodes.add(d)
 
 while stk:
     current= stk.pop()
@@ -22,5 +20,5 @@ while stk:
         nodes.add(s)
         stk.append(s)
 
-# nodes.discard(1)
+nodes.discard()
 print(len(nodes))
