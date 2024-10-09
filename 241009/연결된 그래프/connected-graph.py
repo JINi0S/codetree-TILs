@@ -9,6 +9,7 @@ for _ in range(m):
 nodes = set()
 visited = [False for i in range(n+1)]
 stk = [1]
+visited[1] = True
 
 for d in dic.get(1, []):   
     nodes.add(d)
