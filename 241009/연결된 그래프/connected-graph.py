@@ -3,13 +3,13 @@ dic = dict()
 
 for _ in range(m):
     st, en = map(int, input().split())
-    dic.setdefault(st, []).append(en)
-    # dic.setdefault(en, []).append(st)
+    dic.setdefault(st, set()).add(en)
+    dic.setdefault(en, set()).add(st)
 
 nodes = set()
 visited = [False for i in range(n+1)]
 stk = [dic.get(1, [])]
-print(stk)
+
 for d in dic.get(1, []):   
     nodes.add(d)
 
@@ -19,7 +19,6 @@ while stk:
         nslist = dic.get(s, [])
         for ns in nslist:
             if visited[ns] and ns != 1: continue
-
             visited[ns] = True
             nodes.add(ns)
             stk.append([ns])
