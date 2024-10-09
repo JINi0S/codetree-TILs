@@ -1,31 +1,29 @@
-# 14:35 ~ 16:28
+# 14:35 ~ 16:45
 # n: 회전 가능 레벨, 주어진 격자의 크기: 2의 n승 * 2의 n승
 # q: 회전 횟수
 n, q = map(int, input().split())
 N = pow(2, n)
+dx = [0,0,1,-1]
+dy = [1,-1,0,0]
+
 board = []
 for i in range(N):
     tmp = list(map(int, input().split()))
     board.append(tmp)
 
-
 rotateLevels = list(map(int, input().split()))
-# print("LEVELS", rotateLevels)
 
 def printBoard():
     for i in range(N):
         print(board[i])
 
-
-### 함수 구현부
+### ===== 함수 구현부
 def rotate(mapWidth, oneBoardWidth): # 4, 2 => 레벨2
     for i in range(0, N, mapWidth):
         for j in range(0, N, mapWidth):
-            # print("StartPoint", i, j)
             # 좌하, 우하, 우상, 좌상(저장값불러오기) 순으로 이동
             # 좌상 저장
             leto = [x[j:j+oneBoardWidth] for x in board[i:i+oneBoardWidth]]
-            # print(leto)
             
             #좌하 > 좌상
             for ni in range(i, i+oneBoardWidth):
@@ -47,8 +45,6 @@ def rotate(mapWidth, oneBoardWidth): # 4, 2 => 레벨2
                 for nj in range(j+oneBoardWidth, j+oneBoardWidth+oneBoardWidth):
                     board[ni][nj] = leto[ni%oneBoardWidth][nj%oneBoardWidth]
 
-dx = [0,0,1,-1]
-dy = [1,-1,0,0]
 
 def inRange(x):
     if 0<=x<N:
@@ -56,11 +52,11 @@ def inRange(x):
     else:
         return False
 
+
 def melting():
     global dx, dy, board
 
     newBoard = [x[:] for x in board]
-    # print("BEFORE====", board)
 
     for i in range(N):
         for j in range(N):
@@ -75,21 +71,16 @@ def melting():
                 newBoard[i][j] -= 1
 
     board = [x[:] for x in newBoard]
-    # print("AFTER====", board)
-    # print("===========")
+ 
 
-
-def printRes():
-    global dx, dy
-
-    sumV = 0
-
+def getOutput():
     stk = []
     visited = [[False for _ in range(N)] for i in range(N)]
     maxSize = 0
+    sumV = 0
     for i in range(N):
         for j in range(N):
-            if board[i][j] <= 0: continue # ????
+            if board[i][j] <= 0: continue
             if visited[i][j]: continue
             stk.append((i, j))
             visited[i][j] = True
@@ -110,13 +101,12 @@ def printRes():
     print(maxSize)
 
 
-### 수행부
+### ==== 반복수행부
 for level in rotateLevels:
     if level != 0: 
         rotateChoiceWidth = pow(2, level)
         rotateOneBoardWidth = pow(2, level-1)
-        # print(level, rotateChoiceWidth, rotateOneBoardWidth)
         rotate(rotateChoiceWidth, rotateOneBoardWidth)
     melting()
 
-printRes()
+getOutput()
