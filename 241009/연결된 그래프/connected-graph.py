@@ -8,7 +8,7 @@ for _ in range(m):
 nodes = set()
 visited = [False for i in range(n+1)]
 stk = [dic[1]]
-for d in dic[1]:   
+for d in dic.get(1, []):   
     nodes.add(d)
 
 while stk:
