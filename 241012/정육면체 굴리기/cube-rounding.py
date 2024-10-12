@@ -43,7 +43,7 @@ for moveD in moveList:
    
     move(moveD)
     
-   if board[nx][ny] == 0:
+    if board[nx][ny] == 0:
         board[nx][ny] = dice[2]
     else:
         dice[2] = board[nx][ny]
